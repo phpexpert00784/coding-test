@@ -16,9 +16,9 @@ class ItemFactory extends Factory
     public function definition()
     {
         return [
-            'order_id' => \App\Models\Order::factory(), // Correctly references order_id
-            'name' => $this->faker->word(),
-            'price' => $this->faker->randomFloat(2, 5, 100),
+            "order_id" => \App\Models\Order::factory(),
+            "name" => ucfirst(Str::random(rand(5,5))),
+            "price" => $this->faker->numberBetween(100,1000),
         ];
     }
 }

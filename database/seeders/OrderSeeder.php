@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\Customer;
+use App\Models\User;
 use App\Models\Order;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -14,10 +14,10 @@ class OrderSeeder extends Seeder
      */
     public function run(): void
     {
-        $customers = Customer::all();
-
-        foreach ($customers as $customer) {
-            Order::factory(2)->create(['customer_id' => $customer->id]); // Creates 2 orders per customer
+        $users = User::all();
+        //each customer has default 2 order
+        foreach ($users as $user) {
+            Order::factory(2)->create(['user_id' => $user->id]);
         }
     }
 }

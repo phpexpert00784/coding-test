@@ -21,8 +21,9 @@ class Customer extends Model
     {
         return $query->where(function ($q) use ($search) {
            $q->where('email','like', "$search%")
+                ->orWhere('name','like', "$search%")
                ->orWhereHas('orders',function ($q) use($search) {
-                    $q->where('order_number', 'like', "$search%")
+                    $q->where('order_no', 'like', "$search%")
                         ->orWhereHas('items', function ($q) use($search) {
                             $q->where('name', 'like', "%$search%");
                         });

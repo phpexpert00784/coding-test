@@ -17,8 +17,8 @@ class OrderFactory extends Factory
     public function definition()
     {
         return [
-            'customer_id' => \App\Models\Customer::factory(), // Correctly references customer_id
-            'order_number' => $this->faker->unique()->numerify('ORD###'),
+            "user_id" => \App\Models\User::factory(),
+            "order_no" => $this->faker->unique()->numerify('SINGH#####'),
         ];
     }
 

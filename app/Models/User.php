@@ -44,4 +44,23 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
+
+    public function scopeSearch($query, $search)
+    {
+        return $query->where(function ($q) use ($search) {
+           $q->where('email','like', "$search%")
+                ->orWhere('name','like', "$search%")
+                  ->orWhereHas('orders',function ($q) use($search) {
+                    $q->where('order_no', 'like', "$search%")
+                        ->orWhereHas('items', function ($q) use($search) {
+                            $q->where('name', 'like', "%$search%");
+                        });
+               });
+        });
+    }
 }

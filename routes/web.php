@@ -1,12 +1,15 @@
 <?php
 
-use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', [CustomerController::class, 'index'])
-    ->name('customers.index')
-    ->middleware('sanitize-input');
 
-Route::get('/customers', [CustomerController::class, 'index'])
-    ->name('customers.index')
-    ->middleware('sanitize-input');
+//default redirect to listing page
+Route::get('/', function () {
+    return redirect('/listing');
+});
+    
+//customer listing page with order and its items
+Route::get('/listing', [UserController::class, 'index'])
+    ->name('listing.index');
+    

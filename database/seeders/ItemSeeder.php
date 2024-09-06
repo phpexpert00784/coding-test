@@ -15,9 +15,9 @@ class ItemSeeder extends Seeder
     public function run(): void
     {
         $orders = Order::all();
-
+        //Every ORder has default 5 items
         foreach ($orders as $order) {
-            Item::factory(3)->create(['order_id' => $order->id]); // Creates 3 items per order
+            Item::factory(5)->create(['order_id' => $order->id]);
         }
     }
 }
