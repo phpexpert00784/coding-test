@@ -28,24 +28,26 @@
     </div>
 
     <div class="container">
-        <form method="GET" action="{{ route('listing.index') }}" class="mb-4">
+        <form method="GET" action="{{ route('listing.index') }}" class="mb-3 mt-3">
             <div class="input-group">
-                <input type="text" name="search" value="{{ request('search') }}" class="form-control" placeholder="Search by user name , email, order no, or item name">
+                <input type="text" required name="search" value="{{ request('search') }}" class="form-control" placeholder="Search by user name , email, order no, or item name">
                 <button type="submit" class="btn btn-primary">Search</button>
-                <button type="button" class="btn btn-primary" onclick="window.location.href='/'">Clear</button>
+                <button type="button" class="btn btn-primary" onclick="window.location='{{ url("/listing") }}'">Clear</button>
             </div>
         </form>
         <table class="table table-bordered table-striped table-hover" id="table">
             <thead class="thead-dark">
                 <tr>
+                    <th>User Id</th>
                     <th>User Name</th>
                     <th>Email</th>
-                    <th>Orders</th>
+                    <th>Orders as per user</th>
                 </tr>
             </thead>
             <tbody id="tableBodyContents">
                 @foreach($users as $user)
                 <tr class="tableRow" >
+                    <td>{{ $user->id }}</td>
                     <td>{{ $user->name }}</td>
                         <td>{{ $user->email }}</td>
                         <td>
@@ -54,8 +56,8 @@
                                     <li>
                                         <strong>Order No:</strong> {{ $order->order_no }}
                                         <ul class="list-unstyled ms-4">
-                                            @foreach($order->items as $item)
-                                                <li>Item: {{ $item->name }}, Price: ${{ $item->price }}</li>
+                                            @foreach($order->items as $k => $item)
+                                                <li>Item{{$k+1}}: {{ $item->name }}, Price{{$k+1}}: ${{ $item->price }}</li>
                                             @endforeach
                                         </ul>
                                     </li>
